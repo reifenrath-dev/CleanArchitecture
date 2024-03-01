@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Clean.Architecture.Infrastructure.Email;
 
-public class SmtpEmailSender(ILogger<SmtpEmailSender> _logger) : IEmailSender
+internal class SmtpEmailSender(ILogger<SmtpEmailSender> _logger) : IEmailSender
 {
   public async Task SendEmailAsync(string to, string from, string subject, string body)
   {

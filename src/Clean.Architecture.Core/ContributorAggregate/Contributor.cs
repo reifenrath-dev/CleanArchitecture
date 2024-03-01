@@ -3,7 +3,7 @@ using Ardalis.SharedKernel;
 
 namespace Clean.Architecture.Core.ContributorAggregate;
 
-public class Contributor(string name) : EntityBase, IAggregateRoot
+internal class Contributor(string name) : EntityBase, IAggregateRoot
 {
   // Example of validating primary constructor inputs
   // See: https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/tutorials/primary-constructors#initialize-base-class
@@ -22,7 +22,7 @@ public class Contributor(string name) : EntityBase, IAggregateRoot
   }
 }
 
-public class PhoneNumber : ValueObject
+internal class PhoneNumber : ValueObject
 {
   public string CountryCode { get; private set; } = string.Empty;
   public string Number { get; private set; } = string.Empty;

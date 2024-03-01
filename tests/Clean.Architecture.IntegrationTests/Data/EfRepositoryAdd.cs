@@ -3,14 +3,15 @@ using Xunit;
 
 namespace Clean.Architecture.IntegrationTests.Data;
 
-public class EfRepositoryAdd : BaseEfRepoTestFixture
+public class EfRepositoryAdd
 {
   [Fact]
   public async Task AddsContributorAndSetsId()
   {
     var testContributorName = "testContributor";
     var testContributorStatus = ContributorStatus.NotSet;
-    var repository = GetRepository();
+    var fixture = new EfRepoTestFixture();
+    var repository = fixture.GetRepository();
     var Contributor = new Contributor(testContributorName);
 
     await repository.AddAsync(Contributor);

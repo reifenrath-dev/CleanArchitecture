@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Clean.Architecture.Infrastructure.Data;
 
-public static class SeedData
+internal static class SeedData
 {
   public static readonly Contributor Contributor1 = new("Ardalis");
   public static readonly Contributor Contributor2 = new("Snowfrog");

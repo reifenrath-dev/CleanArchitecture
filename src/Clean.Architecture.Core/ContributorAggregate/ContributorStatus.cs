@@ -2,7 +2,7 @@
 
 namespace Clean.Architecture.Core.ContributorAggregate;
 
-public class ContributorStatus : SmartEnum<ContributorStatus>
+internal class ContributorStatus : SmartEnum<ContributorStatus>
 {
   public static readonly ContributorStatus CoreTeam = new(nameof(CoreTeam), 1);
   public static readonly ContributorStatus Community = new(nameof(Community), 2);

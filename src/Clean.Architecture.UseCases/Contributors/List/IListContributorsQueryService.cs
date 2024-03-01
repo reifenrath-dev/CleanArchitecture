@@ -4,7 +4,7 @@
 /// Represents a service that will actually fetch the necessary data
 /// Typically implemented in Infrastructure
 /// </summary>
-public interface IListContributorsQueryService
+internal interface IListContributorsQueryService
 {
   Task<IEnumerable<ContributorDTO>> ListAsync();
 }

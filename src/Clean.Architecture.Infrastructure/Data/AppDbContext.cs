@@ -4,7 +4,7 @@ using Clean.Architecture.Core.ContributorAggregate;
 using Microsoft.EntityFrameworkCore;
 
 namespace Clean.Architecture.Infrastructure.Data;
-public class AppDbContext : DbContext
+internal class AppDbContext : DbContext
 {
   private readonly IDomainEventDispatcher? _dispatcher;
 

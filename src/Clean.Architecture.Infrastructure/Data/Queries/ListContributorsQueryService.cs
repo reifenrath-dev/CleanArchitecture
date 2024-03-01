@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Clean.Architecture.Infrastructure.Data.Queries;
 
-public class ListContributorsQueryService(AppDbContext _db) : IListContributorsQueryService
+internal class ListContributorsQueryService(AppDbContext _db) : IListContributorsQueryService
 {
   // You can use EF, Dapper, SqlClient, etc. for queries - this is just an example
 

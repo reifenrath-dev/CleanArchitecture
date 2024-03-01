@@ -18,7 +18,7 @@ namespace Clean.Architecture.Infrastructure;
 /// An Autofac module responsible for wiring up services defined in Infrastructure.
 /// Mainly responsible for setting up EF and MediatR, as well as other one-off services.
 /// </summary>
-public class AutofacInfrastructureModule : Module
+internal class AutofacInfrastructureModule : Module
 {
   private readonly bool _isDevelopment = false;
   private readonly List<Assembly> _assemblies = [];

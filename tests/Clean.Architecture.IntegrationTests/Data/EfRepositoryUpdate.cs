@@ -4,20 +4,21 @@ using Xunit;
 
 namespace Clean.Architecture.IntegrationTests.Data;
 
-public class EfRepositoryUpdate : BaseEfRepoTestFixture
+public class EfRepositoryUpdate
 {
   [Fact]
   public async Task UpdatesItemAfterAddingIt()
   {
     // add a Contributor
-    var repository = GetRepository();
+    var fixture = new EfRepoTestFixture();
+    var repository = fixture.GetRepository();
     var initialName = Guid.NewGuid().ToString();
     var Contributor = new Contributor(initialName);
 
     await repository.AddAsync(Contributor);
 
     // detach the item so we get a different instance
-    _dbContext.Entry(Contributor).State = EntityState.Detached;
+    fixture.DbContext.Entry(Contributor).State = EntityState.Detached;
 
     // fetch the item and update its title
     var newContributor = (await repository.ListAsync())

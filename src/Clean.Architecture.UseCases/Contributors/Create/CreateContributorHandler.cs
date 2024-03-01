@@ -4,7 +4,7 @@ using Clean.Architecture.Core.ContributorAggregate;
 
 namespace Clean.Architecture.UseCases.Contributors.Create;
 
-public class CreateContributorHandler(IRepository<Contributor> _repository)
+internal class CreateContributorHandler(IRepository<Contributor> _repository)
   : ICommandHandler<CreateContributorCommand, Result<int>>
 {
   public async Task<Result<int>> Handle(CreateContributorCommand request,

@@ -5,7 +5,7 @@ using MimeKit;
 
 namespace Clean.Architecture.Infrastructure.Email;
 
-public class MimeKitEmailSender(ILogger<MimeKitEmailSender> _logger) : IEmailSender
+internal class MimeKitEmailSender(ILogger<MimeKitEmailSender> _logger) : IEmailSender
 {
   public async Task SendEmailAsync(string to, string from, string subject, string body)
   {

@@ -4,7 +4,7 @@ using Clean.Architecture.Core.Interfaces;
 
 namespace Clean.Architecture.UseCases.Contributors.Delete;
 
-public class DeleteContributorHandler(IDeleteContributorService _deleteContributorService)
+internal class DeleteContributorHandler(IDeleteContributorService _deleteContributorService)
   : ICommandHandler<DeleteContributorCommand, Result>
 {
   public async Task<Result> Handle(DeleteContributorCommand request, CancellationToken cancellationToken)

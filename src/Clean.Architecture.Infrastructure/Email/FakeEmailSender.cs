@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Clean.Architecture.Infrastructure.Email;
 
-public class FakeEmailSender(ILogger<FakeEmailSender> _logger) : IEmailSender
+internal class FakeEmailSender(ILogger<FakeEmailSender> _logger) : IEmailSender
 {
   public Task SendEmailAsync(string to, string from, string subject, string body)
   {

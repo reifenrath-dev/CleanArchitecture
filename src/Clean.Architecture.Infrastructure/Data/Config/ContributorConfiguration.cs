@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Clean.Architecture.Infrastructure.Data.Config;
 
-public class ContributorConfiguration : IEntityTypeConfiguration<Contributor>
+internal class ContributorConfiguration : IEntityTypeConfiguration<Contributor>
 {
   public void Configure(EntityTypeBuilder<Contributor> builder)
   {

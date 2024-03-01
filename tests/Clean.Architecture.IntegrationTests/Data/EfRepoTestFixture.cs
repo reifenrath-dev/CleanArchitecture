@@ -7,19 +7,19 @@ using NSubstitute;
 
 namespace Clean.Architecture.IntegrationTests.Data;
 
-public abstract class BaseEfRepoTestFixture
+internal class EfRepoTestFixture
 {
-  protected AppDbContext _dbContext;
+  internal readonly AppDbContext DbContext;
 
-  protected BaseEfRepoTestFixture()
+  public EfRepoTestFixture()
   {
     var options = CreateNewContextOptions();
     var _fakeEventDispatcher = Substitute.For<IDomainEventDispatcher>();
 
-    _dbContext = new AppDbContext(options, _fakeEventDispatcher);
+    DbContext = new AppDbContext(options, _fakeEventDispatcher);
   }
 
-  protected static DbContextOptions<AppDbContext> CreateNewContextOptions()
+  private static DbContextOptions<AppDbContext> CreateNewContextOptions()
   {
     // Create a fresh service provider, and therefore a fresh
     // InMemory database instance.
@@ -36,8 +36,8 @@ public abstract class BaseEfRepoTestFixture
     return builder.Options;
   }
 
-  protected EfRepository<Contributor> GetRepository()
+  public EfRepository<Contributor> GetRepository()
   {
-    return new EfRepository<Contributor>(_dbContext);
+    return new EfRepository<Contributor>(DbContext);
   }
 }

@@ -1,6 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <InternalsVisibleTo Include="Clean.Architecture.Infrastructure"/>
+    <InternalsVisibleTo Include="Clean.Architecture.Web"/>
+    <InternalsVisibleTo Include="Clean.Architecture.FunctionalTests"/>
+    <InternalsVisibleTo Include="Clean.Architecture.UnitTests"/>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Ardalis.Result" />
     <PackageReference Include="MediatR" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />

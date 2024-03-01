@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Clean.Architecture.Core.Services;
 
-public class DeleteContributorService(IRepository<Contributor> _repository,
+internal class DeleteContributorService(IRepository<Contributor> _repository,
   IMediator _mediator,
   ILogger<DeleteContributorService> _logger) : IDeleteContributorService
 {
