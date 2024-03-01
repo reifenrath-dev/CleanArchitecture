@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Clean.Architecture.Infrastructure.Data;
 
-public static class AppDbContextExtensions
+internal static class AppDbContextExtensions
 {
   public static void AddApplicationDbContext(this IServiceCollection services, string connectionString)
   {
