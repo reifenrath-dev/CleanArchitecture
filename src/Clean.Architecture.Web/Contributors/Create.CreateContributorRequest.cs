@@ -2,7 +2,7 @@
 
 namespace Clean.Architecture.Web.Endpoints.ContributorEndpoints;
 
-public class CreateContributorRequest
+internal class CreateContributorRequest
 {
   public const string Route = "/Contributors";
 

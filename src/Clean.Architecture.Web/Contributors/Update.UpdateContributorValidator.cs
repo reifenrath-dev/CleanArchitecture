@@ -7,7 +7,7 @@ namespace Clean.Architecture.Web.Endpoints.ContributorEndpoints;
 /// <summary>
 /// See: https://fast-endpoints.com/docs/validation
 /// </summary>
-public class UpdateContributorValidator : Validator<UpdateContributorRequest>
+internal class UpdateContributorValidator : Validator<UpdateContributorRequest>
 {
   public UpdateContributorValidator()
   {

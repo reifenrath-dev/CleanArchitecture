@@ -11,7 +11,7 @@ namespace Clean.Architecture.Web.ContributorEndpoints;
 /// <remarks>
 /// List all contributors - returns a ContributorListResponse containing the Contributors.
 /// </remarks>
-public class List(IMediator _mediator) : EndpointWithoutRequest<ContributorListResponse>
+internal class List(IMediator _mediator) : EndpointWithoutRequest<ContributorListResponse>
 {
   public override void Configure()
   {

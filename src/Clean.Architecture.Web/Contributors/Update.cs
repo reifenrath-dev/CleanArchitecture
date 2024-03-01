@@ -14,7 +14,7 @@ namespace Clean.Architecture.Web.ContributorEndpoints;
 /// Update an existing Contributor by providing a fully defined replacement set of values.
 /// See: https://stackoverflow.com/questions/60761955/rest-update-best-practice-put-collection-id-without-id-in-body-vs-put-collecti
 /// </remarks>
-public class Update(IMediator _mediator)
+internal class Update(IMediator _mediator)
   : Endpoint<UpdateContributorRequest, UpdateContributorResponse>
 {
   public override void Configure()

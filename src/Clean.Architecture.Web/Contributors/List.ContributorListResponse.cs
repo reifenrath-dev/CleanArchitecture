@@ -2,7 +2,7 @@
 
 namespace Clean.Architecture.Web.Endpoints.ContributorEndpoints;
 
-public class ContributorListResponse
+internal class ContributorListResponse
 {
   public List<ContributorRecord> Contributors { get; set; } = [];
 }

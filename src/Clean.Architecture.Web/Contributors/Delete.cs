@@ -12,7 +12,7 @@ namespace Clean.Architecture.Web.ContributorEndpoints;
 /// <remarks>
 /// Delete a Contributor by providing a valid integer id.
 /// </remarks>
-public class Delete(IMediator _mediator)
+internal class Delete(IMediator _mediator)
   : Endpoint<DeleteContributorRequest>
 {
   public override void Configure()

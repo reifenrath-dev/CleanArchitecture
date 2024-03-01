@@ -1,3 +1,3 @@
 ﻿namespace Clean.Architecture.Web.ContributorEndpoints;
 
-public record ContributorRecord(int Id, string Name, string? PhoneNumber);
+internal record ContributorRecord(int Id, string Name, string? PhoneNumber);
