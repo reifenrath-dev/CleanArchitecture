@@ -1,11 +1,10 @@
-﻿using FastEndpoints;
-using Clean.Architecture.Web.Endpoints.ContributorEndpoints;
-using Clean.Architecture.UseCases.Contributors.Update;
-using MediatR;
-using Ardalis.Result;
+﻿using Ardalis.Result;
 using Clean.Architecture.UseCases.Contributors.Get;
+using Clean.Architecture.UseCases.Contributors.Update;
+using FastEndpoints;
+using MediatR;
 
-namespace Clean.Architecture.Web.ContributorEndpoints;
+namespace Clean.Architecture.Web.Contributors;
 
 /// <summary>
 /// Update an existing Contributor.
@@ -27,7 +26,7 @@ internal class Update(IMediator _mediator)
     UpdateContributorRequest request,
     CancellationToken cancellationToken)
   {
-    var result = await _mediator.Send(new UpdateContributorCommand(request.Id, request.Name!));
+    var result = await _mediator.Send(new UpdateContributorCommand(request.Id, request.Name!), cancellationToken);
 
     if (result.Status == ResultStatus.NotFound)
     {
@@ -37,7 +36,7 @@ internal class Update(IMediator _mediator)
 
     var query = new GetContributorQuery(request.ContributorId);
 
-    var queryResult = await _mediator.Send(query);
+    var queryResult = await _mediator.Send(query, cancellationToken);
 
     if (queryResult.Status == ResultStatus.NotFound)
     {

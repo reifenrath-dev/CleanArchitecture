@@ -16,9 +16,14 @@ This architecture is used in the [DDD Fundamentals course](https://www.pluralsig
 
 :school: Contact Steve's company, [NimblePros](https://nimblepros.com/), for Clean Architecture or DDD training and/or implementation assistance for your team.
 
+## Troubleshooting Chrome Errors
+
+By default the site uses HTTPS and expects you to have a self-signed developer certificate for localhost use. If you get an error with Chrome [see this answer](https://stackoverflow.com/a/31900210/13729) for mitigation instructions.
+
 ## Table Of Contents
 
 - [Clean Architecture](#clean-architecture)
+  - [Troubleshooting Chrome Errors](#troubleshooting-chrome-errors)
   - [Table Of Contents](#table-of-contents)
   - [Give a Star! :star:](#give-a-star-star)
   - [Versions](#versions)
@@ -34,10 +39,12 @@ This architecture is used in the [DDD Fundamentals course](https://www.pluralsig
 - [Goals](#goals)
   - [History and Shameless Plug Section](#history-and-shameless-plug-section)
 - [Design Decisions and Dependencies](#design-decisions-and-dependencies)
+  - [Where To Validate](#where-to-validate)
   - [The Core Project](#the-core-project)
-  - [The SharedKernel Project](#the-sharedkernel-project)
+  - [The Use Cases Project](#the-use-cases-project)
   - [The Infrastructure Project](#the-infrastructure-project)
   - [The Web Project](#the-web-project)
+  - [The SharedKernel Project](#the-sharedkernel-project)
   - [The Test Projects](#the-test-projects)
 - [Patterns Used](#patterns-used)
   - [Domain Events](#domain-events)
@@ -57,47 +64,7 @@ The main branch is now using .NET 8. If you need a previous version use one of t
 - [5.0](https://github.com/ardalis/CleanArchitecture/releases/tag/dotnet-core-5)
 - [3.1](https://github.com/ardalis/CleanArchitecture/tree/dotnet-core-3.1)
 - [2.2](https://github.com/ardalis/CleanArchitecture/tree/dotnet-core-2.2)
-- [2.0](https://github.com/ardalis/CleanArchitecture/tree/dotnet-core-2.0)
-
-## Controllers and Razor Pages
-
-As of the latest version, this solution template only includes support for API Endpoints using the FastEndpoints library. If you want to use my ApiEndpoints library, Razor Pages, and/or Controllers you can use the last template that included them, version 7.1. Alternately, they're easily added to this template after installation.
-
-### Add Ardalis.ApiEndpoints
-
-To use [Ardalis.ApiEndpoints](https://www.nuget.org/packages/Ardalis.ApiEndpoints) instead of (or in addition to) [FastEndpoints](https://fast-endpoints.com/), just add the reference and use the base classes from the documentation.
-
-```powershell
-dotnet add package Ardalis.ApiEndpoints
-```
-
-### Add Controllers
-
-You'll need to add support for controllers to the Program.cs file. You need:
-
-```csharp
-builder.Services.AddControllers(); // ControllersWithView if you need Views
-
-// and
-
-app.MapControllers();
-```
-
-Once these are in place, you should be able to create a Controllers folder and (optionally) a Views folder and everything should work as expected. Personally I find Razor Pages to be much better than Controllers and Views so if you haven't fully investigated Razor Pages you might want to do so right about now before you choose Views.
-
-### Add Razor Pages
-
-You'll need to add support for Razor Pages to the Program.cs file. You need:
-
-```csharp
-builder.Services.AddRazorPages();
-
-// and
-
-app.MapRazorPages();
-```
-
-Then you just add a Pages folder in the root of the project and go from there.
+- [2.0](https://github.com/ardalis/CleanArchitecture/tree/dotnet-core-2.0)\
 
 ## Learn More
 
@@ -142,6 +109,46 @@ Thanks [@dahlsailrunner](https://github.com/dahlsailrunner) for your help gettin
 - Don't include hyphens in the name. See [#201](https://github.com/ardalis/CleanArchitecture/issues/201).
 - Don't use 'Ardalis' as your namespace (conflicts with dependencies).
 
+## What about Controllers and Razor Pages?
+
+As of version 9, this solution template only includes support for API Endpoints using the FastEndpoints library. If you want to use my ApiEndpoints library, Razor Pages, and/or Controllers you can use the last template that included them, version 7.1. Alternately, they're easily added to this template after installation.
+
+### Add Ardalis.ApiEndpoints
+
+To use [Ardalis.ApiEndpoints](https://www.nuget.org/packages/Ardalis.ApiEndpoints) instead of (or in addition to) [FastEndpoints](https://fast-endpoints.com/), just add the reference and use the base classes from the documentation.
+
+```powershell
+dotnet add package Ardalis.ApiEndpoints
+```
+
+### Add Controllers
+
+You'll need to add support for controllers to the Program.cs file. You need:
+
+```csharp
+builder.Services.AddControllers(); // ControllersWithView if you need Views
+
+// and
+
+app.MapControllers();
+```
+
+Once these are in place, you should be able to create a Controllers folder and (optionally) a Views folder and everything should work as expected. Personally I find Razor Pages to be much better than Controllers and Views so if you haven't fully investigated Razor Pages you might want to do so right about now before you choose Views.
+
+### Add Razor Pages
+
+You'll need to add support for Razor Pages to the Program.cs file. You need:
+
+```csharp
+builder.Services.AddRazorPages();
+
+// and
+
+app.MapRazorPages();
+```
+
+Then you just add a Pages folder in the root of the project and go from there.
+
 ## Using the GitHub Repository
 
 To get started based on this repository, you need to get a copy locally. You have three options: fork, clone, or download. Most of the time, you probably just want to download.
@@ -165,6 +172,12 @@ dotnet ef migrations add MIGRATIONNAME -c AppDbContext -p ../Your.ProjectName.In
 ```
 
 To use SqlServer, change `options.UseSqlite(connectionString));` to `options.UseSqlServer(connectionString));` in the `Your.ProjectName.Infrastructure.StartupSetup` file. Also remember to replace the `SqliteConnection` with `DefaultConnection` in the `Your.ProjectName.Web.Program` file, which points to your Database Server.
+
+To update the database use this command from the Web project folder (replace `Clean.Architecture` with your project's name):
+
+```powershell
+dotnet ef database update -c AppDbContext -p ../Clean.Architecture.Infrastructure/Clean.Architecture.Infrastructure.csproj -s Clean.Architecture.Web.csproj
+```
 
 # Goals
 
@@ -224,7 +237,7 @@ The Core project is the center of the Clean Architecture design, and all other p
 
 An optional project, I've included it because many folks were demanding it and it's easier to remove than to add later. This is also often referred to as the *Application* or *Application Services* layer. The Use Cases project is organized following CQRS into Commands and Queries. Commands mutate the domain model and thus should always use Repository abstractions for their data access. Queries are readonly, and thus do not need to use the repository pattern, but instead can use whatever query service or approach is most convenient. However, since the Use Cases project is set up to depend on Core and not directly on Infrastructure, there will still need to be abstractions defined for its data access. And it *can* use things like specifications, which can sometimes help encapsulate query logic as well as result type mapping. But it doesn't *have* to use repository/specification - it can just issue a SQL query or call a stored procedure if that's the most efficient way to get the data.
 
-Although this is an option project to include (without it, your API endpoints would just work directly with the domain model or query services), it does provide a nice UI-ignorant place to add automated tests.
+Although this is an optional project to include (without it, your API endpoints would just work directly with the domain model or query services), it does provide a nice UI-ignorant place to add automated tests.
 
 ## The Infrastructure Project
 

@@ -1,9 +1,10 @@
-﻿using FastEndpoints;
-using MediatR;
-using Clean.Architecture.Web.Endpoints.ContributorEndpoints;
+﻿using Ardalis.Result;
+using Clean.Architecture.UseCases.Contributors;
 using Clean.Architecture.UseCases.Contributors.List;
+using FastEndpoints;
+using MediatR;
 
-namespace Clean.Architecture.Web.ContributorEndpoints;
+namespace Clean.Architecture.Web.Contributors;
 
 /// <summary>
 /// List all Contributors
@@ -21,7 +22,7 @@ internal class List(IMediator _mediator) : EndpointWithoutRequest<ContributorLis
 
   public override async Task HandleAsync(CancellationToken cancellationToken)
   {
-    var result = await _mediator.Send(new ListContributorsQuery(null, null));
+    Result<IEnumerable<ContributorDTO>> result = await _mediator.Send(new ListContributorsQuery(null, null), cancellationToken);
 
     if (result.IsSuccess)
     {
